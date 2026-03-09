@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+
+<h3>Room: {{room}}</h3>
+<div id="typing"></div>
+
+<div id="messages" class="messages">
+
+{% for u,m in history %}
+<div class="{{'me' if u==user else 'other'}}">
+{{m if u==user else u+': '+m}}
+</div>
+{% endfor %}
+
+</div>
+
+<input id="msg" placeholder="Type message" oninput="typing()">
+<input type="file" id="file">
+<button onclick="send()">Send</button>
+<button onclick="sendFile()">Send File</button>
+
+<script src="/static/js/chat.js"></script>
+<script>
+init("{{user}}","{{room}}")
+</script>
+
+</body>
+</html>
